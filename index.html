@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amit Kattyan — AI Platform Lead | AWS Golden Jacket | Multi-Agent Systems Expert</title>
+    <meta name="description" content="Engineering Leader specializing in AWS infrastructure, Kubernetes, and Agentic AI. AWS Golden Jacket Achiever (top 1% globally) with 8x certifications. Building enterprise-scale AI platforms.">
+    <meta name="keywords" content="Amit Kattyan, AI Platform Lead, AWS Architect, LangGraph, Multi-Agent Systems, Kubernetes, AWS Bedrock, Enterprise AI, Cloud Architecture">
+    <meta property="og:title" content="Amit Kattyan — AI Platform Lead | AWS Golden Jacket">
+    <meta property="og:description" content="Engineering Leader • 9+ years • AWS Golden Jacket • Building enterprise AI at Betsson Group">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-base: #0a0a0f;
+            --bg-elevated: #13131a;
+            --bg-card: #1a1a24;
+            --accent-primary: #00ff94;
+            --accent-secondary: #00d4ff;
+            --accent-purple: #b967ff;
+            --accent-gold: #ffd700;
+            --accent-orange: #ff6b35;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a0a0ab;
+            --text-muted: #6b6b7a;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-bright: rgba(0, 255, 148, 0.3);
+            --glow-primary: rgba(0, 255, 148, 0.4);
+            --glow-secondary: rgba(0, 212, 255, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scroll Progress */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            z-index: 10000;
+            box-shadow: 0 0 20px var(--glow-primary);
+            transition: width 0.1s ease;
+        }
+
+        /* Animated Grid Background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(var(--accent-primary) 1px, transparent 1px),
+                linear-gradient(90deg, var(--accent-primary) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: grid-scroll 20s linear infinite;
+        }
+
+        @keyframes grid-scroll {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        /* Floating Orbs */
+        .orb-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            animation: float-orb 30s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-primary);
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-secondary);
+            bottom: 10%;
+            right: 10%;
+            animation-delay: -10s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: var(--accent-purple);
+            top: 50%;
+            left: 50%;
+            animation-delay: -20s;
+        }
+
+        @keyframes float-orb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, -100px) scale(1.1); }
+            66% { transform: translate(-100px, 100px) scale(0.9); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        nav.scrolled {
+            padding: 1rem 3rem;
+            background: rgba(10, 10, 15, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::before { width: 100%; }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+            -webkit-text-fill-color: #000 !important;
+            color: #000 !important;
+            padding: 0.7rem 1.8rem !important;
+            border-radius: 50px !important;
+            font-weight: 700 !important;
+            box-shadow: 0 4px 20px var(--glow-primary);
+            transition: all 0.3s !important;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 30px var(--glow-primary) !important;
+        }
+
+        .nav-cta::before { display: none !important; }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 150px 3rem 100px;
+            z-index: 1;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(0, 255, 148, 0.1);
+            border: 1.5px solid var(--border-bright);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            animation: pulse-border 3s infinite;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { border-color: var(--border-bright); box-shadow: 0 0 20px rgba(0, 255, 148, 0.2); }
+            50% { border-color: rgba(0, 255, 148, 0.6); box-shadow: 0 0 30px rgba(0, 255, 148, 0.4); }
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+            box-shadow: 0 0 10px var(--accent-primary);
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+
+        /* Hero Typography */
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -3px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .hero-subtitle strong {
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        /* Key Metrics */
+        .key-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .metric {
+            position: relative;
+            padding-right: 2rem;
+        }
+
+        .metric:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 15%;
+            height: 70%;
+            width: 1px;
+            background: linear-gradient(transparent, var(--border), transparent);
+        }
+
+        .metric-value {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        /* CTA Buttons */
+        .hero-cta {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: #000;
+            box-shadow: 0 8px 30px var(--glow-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px var(--glow-primary);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--border-bright);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 255, 148, 0.15);
+        }
+
+        /* Hero Visual Card */
+        .hero-visual {
+            position: relative;
+            perspective: 1200px;
+        }
+
+        .hero-card {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, rgba(0, 255, 148, 0.05), rgba(0, 212, 255, 0.05));
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 3rem;
+            backdrop-filter: blur(30px);
+            transform-style: preserve-3d;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-card:hover {
+            transform: translateY(-20px) rotateY(5deg);
+            box-shadow: 
+                0 40px 100px rgba(0, 255, 148, 0.2),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            border-color: var(--border-bright);
+        }
+
+        .card-content {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(255, 215, 0, 0.15);
+            border: 1.5px solid rgba(255, 215, 0, 0.4);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            font-weight: 800;
+            width: fit-content;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        .card-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            margin: 2rem 0;
+            letter-spacing: -1px;
+        }
+
+        .card-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .card-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .card-stat:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--border-bright);
+            transform: translateY(-4px);
+        }
+
+        .card-stat-value {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+            line-height: 1;
+        }
+
+        .card-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Sections */
+        .section {
+            position: relative;
+            padding: 120px 3rem;
+            z-index: 1;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: rgba(0, 255, 148, 0.08);
+            border: 1px solid var(--border-bright);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .section-title .gradient-text {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Expertise Cards */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .expertise-card {
+            position: relative;
+            padding: 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s;
+            overflow: hidden;
+        }
+
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--border-bright);
+            box-shadow: 0 30px 80px rgba(0, 255, 148, 0.15);
+        }
+
+        .expertise-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .expertise-icon {
+            width: 75px;
+            height: 75px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 35px var(--glow-primary);
+        }
+
+        .expertise-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+        }
+
+        .expertise-desc {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+            font-size: 1.05rem;
+        }
+
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .tag {
+            padding: 0.6rem 1.2rem;
+            background: rgba(0, 255, 148, 0.08);
+            border: 1px solid rgba(0, 255, 148, 0.2);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            font-family: 'IBM Plex Mono', monospace;
+            transition: all 0.3s;
+        }
+
+        .tag:hover {
+            background: rgba(0, 255, 148, 0.15);
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Stats Highlight Section */
+        .stats-highlight {
+            padding: 100px 3rem;
+            background: linear-gradient(135deg, rgba(0, 255, 148, 0.03), rgba(0, 212, 255, 0.03));
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stats-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 255, 148, 0.05), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: var(--border-bright);
+            box-shadow: 0 30px 70px rgba(0, 255, 148, 0.2);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 1.2rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .project-card {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--border-bright);
+            box-shadow: 0 40px 90px rgba(0, 255, 148, 0.2);
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-header {
+            height: 240px;
+            background: linear-gradient(135deg, rgba(0, 255, 148, 0.08), rgba(0, 212, 255, 0.08));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 40%, var(--bg-card) 100%);
+        }
+
+        .project-content {
+            padding: 2.5rem;
+        }
+
+        .project-badge {
+            display: inline-block;
+            padding: 0.6rem 1.3rem;
+            background: rgba(0, 255, 148, 0.1);
+            border: 1px solid rgba(0, 255, 148, 0.3);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+            font-size: 1.05rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .tech-tag {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 212, 255, 0.08);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--accent-secondary);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 4rem auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, var(--border-bright), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 5rem;
+            margin-bottom: 4rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 1.4rem;
+            top: 0.5rem;
+            width: 1.2rem;
+            height: 1.2rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--glow-primary);
+            animation: pulse-glow 3s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px var(--glow-primary); }
+            50% { box-shadow: 0 0 35px var(--glow-primary); }
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--border-bright);
+            transform: translateX(10px);
+            box-shadow: 0 20px 60px rgba(0, 255, 148, 0.1);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+            gap: 2rem;
+        }
+
+        .company-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .role-title {
+            font-size: 1.1rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .date-badge {
+            padding: 0.6rem 1.3rem;
+            background: rgba(0, 255, 148, 0.08);
+            border: 1px solid rgba(0, 255, 148, 0.2);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            white-space: nowrap;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .achievements {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .achievement {
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid var(--accent-primary);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .achievement strong {
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .cert-card {
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.15);
+        }
+
+        .cert-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .cert-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .cert-org {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .contact-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            text-decoration: none;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(0, 255, 148, 0.05), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--border-bright);
+            box-shadow: 0 25px 60px rgba(0, 255, 148, 0.15);
+        }
+
+        .contact-card:hover::before {
+            opacity: 1;
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #000;
+            box-shadow: 0 10px 30px var(--glow-primary);
+        }
+
+        .contact-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            background: var(--bg-elevated);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .hero-visual {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero {
+                padding: 120px 1.5rem 80px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+                letter-spacing: -1px;
+            }
+
+            .section {
+                padding: 80px 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .key-metrics {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .metric:not(:last-child)::after {
+                display: none;
+            }
+
+            .timeline::before {
+                left: 1rem;
+            }
+
+            .timeline-item {
+                padding-left: 3.5rem;
+            }
+
+            .timeline-dot {
+                left: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-indicator"></div>
+
+    <!-- Animated Background -->
+    <div class="grid-bg"></div>
+    <div class="orb-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">AK</div>
+            <ul class="nav-links">
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    AVAILABLE FOR OPPORTUNITIES
+                </div>
+
+                <h1>
+                    Building<br>
+                    <span class="gradient-text">Enterprise AI</span><br>
+                    at Scale
+                </h1>
+
+                <p class="hero-subtitle">
+                    Engineering Leader specializing in <strong>AWS infrastructure</strong>, <strong>Kubernetes</strong>, and <strong>Agentic AI</strong>. 
+                    AWS Golden Jacket achiever (top 1% globally) with proven track record delivering <strong>measurable business impact</strong> 
+                    through cost optimization and secure cloud architectures.
+                </p>
+
+                <div class="key-metrics">
+                    <div class="metric">
+                        <div class="metric-value">9+</div>
+                        <div class="metric-label">Years Experience</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">8x</div>
+                        <div class="metric-label">AWS Certified</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Top 1%</div>
+                        <div class="metric-label">Golden Jacket</div>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">
+                        Let's Connect
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/amitkattyan/" target="_blank" class="btn btn-secondary">
+                        View LinkedIn
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="card-content">
+                        <div class="card-badge">
+                            <i class="fas fa-trophy"></i>
+                            AWS GOLDEN JACKET
+                        </div>
+
+                        <div class="card-title">
+                            AI Platform<br>
+                            Architecture
+                        </div>
+
+                        <div class="card-stats">
+                            <div class="card-stat">
+                                <div class="card-stat-value">40%</div>
+                                <div class="card-stat-label">Faster Production</div>
+                            </div>
+                            <div class="card-stat">
+                                <div class="card-stat-value">99.9%</div>
+                                <div class="card-stat-label">Availability</div>
+                            </div>
+                            <div class="card-stat">
+                                <div class="card-stat-value">30%</div>
+                                <div class="card-stat-label">Cost Reduction</div>
+                            </div>
+                            <div class="card-stat">
+                                <div class="card-stat-value">70%</div>
+                                <div class="card-stat-label">Lower Latency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Highlight -->
+    <section class="stats-highlight">
+        <div class="stats-grid">
+            <div class="stat-card fade-in">
+                <div class="stat-number">40%</div>
+                <div class="stat-label">Reduced Time to Production<br>for AI Use Cases</div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Platform Availability<br>Millions of Events/Sec</div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-number">30%</div>
+                <div class="stat-label">Infrastructure Cost<br>Savings Annually</div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-number">70%</div>
+                <div class="stat-label">Data Latency Reduction<br>Real-Time Streaming</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-tag">Core Competencies</div>
+                <h2 class="section-title">
+                    Areas of <span class="gradient-text">Expertise</span>
+                </h2>
+                <p class="section-subtitle">
+                    Specialized in building enterprise-scale AI platforms, cloud infrastructure, 
+                    and multi-agent systems that deliver measurable business outcomes
+                </p>
+            </div>
+
+            <div class="expertise-grid">
+                <div class="expertise-card fade-in">
+                    <div class="expertise-icon">🤖</div>
+                    <h3 class="expertise-title">AI & Machine Learning</h3>
+                    <p class="expertise-desc">
+                        Building production-grade AI platforms with multi-agent systems, RAG architectures, 
+                        and LLM orchestration. Expertise in autonomous decisioning workflows for betting 
+                        intelligence, fraud detection, and personalized experiences.
+                    </p>
+                    <div class="expertise-tags">
+                        <span class="tag">LangGraph</span>
+                        <span class="tag">LangChain</span>
+                        <span class="tag">AWS Bedrock</span>
+                        <span class="tag">SageMaker</span>
+                        <span class="tag">Multi-Agent</span>
+                        <span class="tag">RAG</span>
+                        <span class="tag">MCP</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card fade-in">
+                    <div class="expertise-icon">☁️</div>
+                    <h3 class="expertise-title">Cloud Infrastructure</h3>
+                    <p class="expertise-desc">
+                        AWS Golden Jacket achiever with 8 certifications. Expert in designing secure, 
+                        scalable cloud architectures for 2M+ users. Proven track record in large-scale 
+                        migrations achieving 99.99% availability with 40% cost savings.
+                    </p>
+                    <div class="expertise-tags">
+                        <span class="tag">AWS</span>
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">Terraform</span>
+                        <span class="tag">Lambda</span>
+                        <span class="tag">EKS</span>
+                        <span class="tag">Serverless</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card fade-in">
+                    <div class="expertise-icon">🔄</div>
+                    <h3 class="expertise-title">Real-Time Data Engineering</h3>
+                    <p class="expertise-desc">
+                        Building AI-ready data platforms processing millions of events per second. 
+                        Transformed legacy ETL into near real-time streaming pipelines, reducing data 
+                        latency by 70% using Kafka, Apache NiFi, and modern data stack.
+                    </p>
+                    <div class="expertise-tags">
+                        <span class="tag">Kafka</span>
+                        <span class="tag">Snowflake</span>
+                        <span class="tag">Airflow</span>
+                        <span class="tag">NiFi</span>
+                        <span class="tag">ETL</span>
+                        <span class="tag">Streaming</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card fade-in">
+                    <div class="expertise-icon">🔐</div>
+                    <h3 class="expertise-title">Security & Compliance</h3>
+                    <p class="expertise-desc">
+                        Enterprise-grade security implementation with AWS Guardrails, IAM least privilege, 
+                        encryption, and network isolation. Designed secure AWS landing zones compliant 
+                        with GDS standards for UK public sector clients.
+                    </p>
+                    <div class="expertise-tags">
+                        <span class="tag">IAM</span>
+                        <span class="tag">KMS</span>
+                        <span class="tag">RBAC</span>
+                        <span class="tag">VPC</span>
+                        <span class="tag">TLS</span>
+                        <span class="tag">Compliance</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card fade-in">
+                    <div class="expertise-icon">📊</div>
+                    <h3 class="expertise-title">DevOps & Observability</h3>
+                    <p class="expertise-desc">
+                        Optimized CI/CD pipelines with integrated SSO/RBAC and secrets management, reducing 
+                        security vulnerabilities by 60%. Implemented enterprise observability reducing MTTR 
+                        by 30% through automated alerting.
+                    </p>
+                    <div class="expertise-tags">
+                        <span class="tag">Prometheus</span>
+                        <span class="tag">Grafana</span>
+                        <span class="tag">Datadog</span>
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">GitHub Actions</span>
+                    </div>
+                </div>
+
+                <div class="expertise-card fade-in">
+                    <div class="expertise-icon">💡</div>
+                    <h3 class="expertise-title">Technical Leadership</h3>
+                    <p class="expertise-desc">
+                        Led cross-functional teams and partnered with C-level executives on AI platform strategy. 
+                        Mentored engineers in microservices architecture. Secured £2M+ in follow-on engagements 
+                        through cost optimization initiatives.
+                    </p>
+                    <div class="expertise-tags">
+                        <span class="tag">Strategy</span>
+                        <span class="tag">Mentorship</span>
+                        <span class="tag">Architecture</span>
+                        <span class="tag">Stakeholder</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-tag">Career Journey</div>
+                <h2 class="section-title">
+                    Professional <span class="gradient-text">Experience</span>
+                </h2>
+                <p class="section-subtitle">
+                    9+ years of engineering leadership across AI platforms, cloud architecture, and enterprise systems
+                </p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="company-name">Betsson Group</div>
+                                <div class="role-title">AI Platform Lead</div>
+                            </div>
+                            <div class="date-badge">Jul 2025 – Present</div>
+                        </div>
+                        <div class="achievements">
+                            <div class="achievement">
+                                Led buildout of AI-first agentic platform leveraging AWS Bedrock, SageMaker and MCP-based orchestration that <strong>reduced time to production for AI use cases by 40%</strong>
+                            </div>
+                            <div class="achievement">
+                                Designed multi-agent systems with MCP servers integrating tool use, memory and RAG for <strong>autonomous decisioning workflows</strong> across betting intelligence, fraud detection and personalized experiences
+                            </div>
+                            <div class="achievement">
+                                Built real-time AI-ready data platforms using Kafka, Lambda, Terraform and Snowflake processing <strong>millions of events per second with 99.9% availability</strong>
+                            </div>
+                            <div class="achievement">
+                                Established end-to-end LLM platform capabilities including prompt orchestration, evaluation pipelines, guardrails and cost optimization <strong>reducing infrastructure costs by 30% annually</strong>
+                            </div>
+                            <div class="achievement">
+                                Transformed legacy ETL into near real-time streaming pipelines using Apache NiFi and EKS <strong>reducing data latency by 70%</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="company-name">Accenture</div>
+                                <div class="role-title">AWS Architect & Technical Lead</div>
+                            </div>
+                            <div class="date-badge">Apr 2022 – Nov 2024</div>
+                        </div>
+                        <div class="achievements">
+                            <div class="achievement">
+                                Led technical assessments for UK public sector clients (NHS, Home Office) and designed <strong>secure AWS landing zones compliant with GDS standards for 2M+ users</strong>
+                            </div>
+                            <div class="achievement">
+                                Directed large-scale migrations from on-premises to AWS achieving <strong>40% cost savings with 99.99% availability</strong> and minimal downtime
+                            </div>
+                            <div class="achievement">
+                                Designed serverless microservices using API Gateway, Lambda and DynamoDB <strong>reducing costs by 30% annually and improving performance by 50%</strong>
+                            </div>
+                            <div class="achievement">
+                                Implemented containerized microservices using EKS and ECS <strong>reducing infrastructure costs by 45% with 99.99% uptime</strong>
+                            </div>
+                            <div class="achievement">
+                                Developed CI/CD pipelines with integrated SSO/RBAC and secrets management <strong>reducing security vulnerabilities by 60%</strong>
+                            </div>
+                            <div class="achievement">
+                                Presented cost optimization projects to C-level executives, establishing best practices and <strong>securing £2M+ in follow-on engagements</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="company-name">Genpact</div>
+                                <div class="role-title">AWS Consultant</div>
+                            </div>
+                            <div class="date-badge">Jun 2021 – Jan 2022</div>
+                        </div>
+                        <div class="achievements">
+                            <div class="achievement">
+                                Designed S3-based data lakes and database architectures with replication strategies <strong>optimizing storage costs by 35%</strong> for global finance clients
+                            </div>
+                            <div class="achievement">
+                                Built serverless ETL pipelines using Python and AWS Glue <strong>improving data processing reliability to 99.5%</strong> and reducing manual overhead by 70%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div>
+                                <div class="company-name">Accenture</div>
+                                <div class="role-title">Application Development Senior Analyst</div>
+                            </div>
+                            <div class="date-badge">May 2016 – Jun 2021</div>
+                        </div>
+                        <div class="achievements">
+                            <div class="achievement">
+                                Engineered end-to-end data pipelines using Redshift and Lambda <strong>improving query performance by 60%</strong> through advanced partitioning
+                            </div>
+                            <div class="achievement">
+                                Implemented CI/CD pipelines <strong>improving deployment speed by 50%</strong> and optimized SQL queries for enhanced database performance
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-tag">Portfolio</div>
+                <h2 class="section-title">
+                    Featured <span class="gradient-text">Projects</span>
+                </h2>
+                <p class="section-subtitle">
+                    Production-grade AI applications and enterprise systems demonstrating technical excellence
+                </p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <i class="fas fa-comments" style="position: relative; z-index: 1;"></i>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-badge">Production AI</span>
+                        <h3 class="project-title">AI Career Conversation Agent</h3>
+                        <p class="project-desc">
+                            Production-grade conversational AI chatbot using LangChain and Hugging Face with RAG patterns 
+                            for intelligent career guidance enabling natural multi-turn conversations with contextual memory.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">LangChain</span>
+                            <span class="tech-tag">Hugging Face</span>
+                            <span class="tech-tag">RAG</span>
+                            <span class="tech-tag">NLP</span>
+                        </div>
+                        <a href="https://huggingface.co/spaces/amitkattyan01/career_conversation" target="_blank" class="project-link">
+                            Try Live Demo
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <i class="fas fa-network-wired" style="position: relative; z-index: 1;"></i>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-badge">Multi-Agent System</span>
+                        <h3 class="project-title">Risk Monitoring System</h3>
+                        <p class="project-desc">
+                            LangGraph-based multi-agent system with AWS Bedrock and vector databases for real-time anomaly 
+                            detection achieving 40% reduction in manual intervention through autonomous decisioning.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">LangGraph</span>
+                            <span class="tech-tag">AWS Bedrock</span>
+                            <span class="tech-tag">Vector DB</span>
+                            <span class="tech-tag">Real-Time</span>
+                        </div>
+                        <a href="#contact" class="project-link">
+                            Learn More
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <i class="fas fa-cloud" style="position: relative; z-index: 1;"></i>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-badge">Enterprise Platform</span>
+                        <h3 class="project-title">AI-Ready Data Platform</h3>
+                        <p class="project-desc">
+                            Scalable real-time streaming platform using Kafka, AWS Lambda, and Snowflake processing millions 
+                            of events per second with 99.9% availability for AI/ML workloads.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Kafka</span>
+                            <span class="tech-tag">Lambda</span>
+                            <span class="tech-tag">Snowflake</span>
+                            <span class="tech-tag">Terraform</span>
+                        </div>
+                        <a href="#contact" class="project-link">
+                            View Architecture
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-tag">Credentials</div>
+                <h2 class="section-title">
+                    Certifications & <span class="gradient-text">Awards</span>
+                </h2>
+                <p class="section-subtitle">
+                    AWS Golden Jacket achiever with 8 professional certifications across architecture, security, and machine learning
+                </p>
+            </div>
+
+            <div class="cert-grid">
+                <div class="cert-card fade-in">
+                    <div class="cert-icon">🏆</div>
+                    <div class="cert-name">AWS Golden Jacket</div>
+                    <div class="cert-org">Top 1% Globally</div>
+                </div>
+
+                <div class="cert-card fade-in">
+                    <div class="cert-icon">🎓</div>
+                    <div class="cert-name">Solutions Architect Professional</div>
+                    <div class="cert-org">Amazon Web Services</div>
+                </div>
+
+                <div class="cert-card fade-in">
+                    <div class="cert-icon">🎓</div>
+                    <div class="cert-name">DevOps Engineer Professional</div>
+                    <div class="cert-org">Amazon Web Services</div>
+                </div>
+
+                <div class="cert-card fade-in">
+                    <div class="cert-icon">🎓</div>
+                    <div class="cert-name">Security Specialty</div>
+                    <div class="cert-org">Amazon Web Services</div>
+                </div>
+
+                <div class="cert-card fade-in">
+                    <div class="cert-icon">🎓</div>
+                    <div class="cert-name">Advanced Networking Specialty</div>
+                    <div class="cert-org">Amazon Web Services</div>
+                </div>
+
+                <div class="cert-card fade-in">
+                    <div class="cert-icon">🎓</div>
+                    <div class="cert-name">Machine Learning Specialty</div>
+                    <div class="cert-org">Amazon Web Services</div>
+                </div>
+
+                <div class="cert-card fade-in">
+                    <div class="cert-icon">🎓</div>
+                    <div class="cert-name">Terraform Associate</div>
+                    <div class="cert-org">HashiCorp</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-tag">Get In Touch</div>
+                <h2 class="section-title">
+                    Let's <span class="gradient-text">Connect</span>
+                </h2>
+                <p class="section-subtitle">
+                    Open to new opportunities in AI platform engineering, cloud architecture, and technical leadership
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <a href="mailto:amitkattyan@gmail.com" class="contact-card fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">amitkattyan@gmail.com</div>
+                </a>
+
+                <a href="https://www.linkedin.com/in/amitkattyan/" target="_blank" class="contact-card fade-in">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <div class="contact-label">LinkedIn</div>
+                    <div class="contact-value">in/amitkattyan</div>
+                </a>
+
+                <a href="https://github.com/kattyanami" target="_blank" class="contact-card fade-in">
+                    <div class="contact-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="contact-label">GitHub</div>
+                    <div class="contact-value">kattyanami</div>
+                </a>
+
+                <a href="tel:+919692021371" class="contact-card fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-label">Phone</div>
+                    <div class="contact-value">+91 9692021371</div>
+                </a>
+
+                <a href="https://huggingface.co/spaces/amitkattyan01/career_conversation" target="_blank" class="contact-card fade-in">
+                    <div class="contact-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="contact-label">AI Career Agent</div>
+                    <div class="contact-value">Try Demo</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Amit Kattyan • AI Platform Engineering Leader</p>
+        <p>Remote • Available for Global Opportunities</p>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/amitkattyan/" target="_blank" class="footer-link">LinkedIn</a>
+            <a href="https://github.com/kattyanami" target="_blank" class="footer-link">GitHub</a>
+            <a href="mailto:amitkattyan@gmail.com" class="footer-link">Email</a>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Progress Indicator
+        window.addEventListener('scroll', () => {
+            const indicator = document.querySelector('.scroll-indicator');
+            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            indicator.style.width = `${scrollPercentage}%`;
+        });
+
+        // Navigation Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Fade-in Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
